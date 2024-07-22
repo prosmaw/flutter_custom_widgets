@@ -30,63 +30,77 @@ class _AngularGradientButtonState extends State<AngularGradientButton>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const SizedBox(
-          height: 65,
-          width: 280,
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        automaticallyImplyLeading: true,
+        title: const Text(
+          "Angular Gradient button",
+          style: TextStyle(color: Colors.white),
         ),
-        Positioned(
-            top: 5,
-            child: AnimatedBuilder(
-                animation: _animationController,
-                builder: (context, child) {
-                  return GradientBorder(
-                    gradient: borderGradient,
-                    radius: 20,
-                    size: const Size(280, 60),
-                    strokeWidth: 5,
-                  );
-                })),
-        Positioned(
-          top: 0,
-          child: Container(
-            height: 60,
-            width: 280,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                    color: Colors.black,
-                    width: 3,
-                    strokeAlign: BorderSide.strokeAlignOutside),
-                gradient: const LinearGradient(colors: [
-                  Colors.black,
-                  Colors.black,
-                  Colors.black,
-                  Colors.transparent
-                ], transform: GradientRotation(math.pi / 2))),
-          ),
+      ),
+      body: Center(
+        child: Stack(
+          children: [
+            const SizedBox(
+              height: 65,
+              width: 280,
+            ),
+            Positioned(
+                top: 5,
+                child: AnimatedBuilder(
+                    animation: _animationController,
+                    builder: (context, child) {
+                      return GradientBorder(
+                        gradient: borderGradient,
+                        radius: 20,
+                        size: const Size(280, 60),
+                        strokeWidth: 5,
+                      );
+                    })),
+            Positioned(
+              top: 0,
+              child: Container(
+                height: 60,
+                width: 280,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                        color: Colors.black,
+                        width: 3,
+                        strokeAlign: BorderSide.strokeAlignOutside),
+                    gradient: const LinearGradient(colors: [
+                      Colors.black,
+                      Colors.black,
+                      Colors.black,
+                      Colors.transparent
+                    ], transform: GradientRotation(math.pi / 2))),
+              ),
+            ),
+            Positioned(
+              top: 5,
+              child: FilledButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                      backgroundColor: const WidgetStatePropertyAll<Color>(
+                          Color.fromARGB(255, 58, 56, 56)),
+                      fixedSize:
+                          const WidgetStatePropertyAll<Size>(Size(280, 60)),
+                      shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)))),
+                  child: const Text(
+                    "Get started",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  )),
+            )
+          ],
         ),
-        Positioned(
-          top: 5,
-          child: FilledButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                  backgroundColor: const WidgetStatePropertyAll<Color>(
-                      Color.fromARGB(255, 58, 56, 56)),
-                  fixedSize: const WidgetStatePropertyAll<Size>(Size(280, 60)),
-                  shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)))),
-              child: const Text(
-                "Get started",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-              )),
-        )
-      ],
+      ),
     );
   }
 }

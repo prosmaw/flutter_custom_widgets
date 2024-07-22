@@ -21,16 +21,35 @@ class _RotatingGradientArcState extends State<RotatingGradientArc>
   Gradient get borderGradient => const LinearGradient(colors: BaseColors.grad1);
 
   @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-        animation: _animationController,
-        builder: (context, child) {
-          return CustomPaint(
-            size: const Size(200, 200),
-            painter: GradientArcPainter(
-                startAngle: _turnAnimation.value, gradient: borderGradient),
-          );
-        });
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        title: const Text(
+          "Rotating gradient arc",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
+      ),
+      body: Center(
+        child: AnimatedBuilder(
+            animation: _animationController,
+            builder: (context, child) {
+              return CustomPaint(
+                size: const Size(200, 200),
+                painter: GradientArcPainter(
+                    startAngle: _turnAnimation.value, gradient: borderGradient),
+              );
+            }),
+      ),
+    );
   }
 }
 
@@ -73,5 +92,5 @@ class GradientArcPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
