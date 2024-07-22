@@ -1,3 +1,4 @@
+import 'package:custom_widgets/style.dart';
 import 'package:custom_widgets/widgets/gradient_border.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -18,15 +19,9 @@ class _AngularGradientButtonState extends State<AngularGradientButton>
     vsync: this,
   )..repeat();
 
-  Gradient get borderGradient => LinearGradient(colors: const [
-        Colors.red,
-        Colors.orange,
-        Colors.yellow,
-        Colors.green,
-        Colors.blue,
-        Colors.purple,
-        Colors.pink
-      ], transform: GradientRotation(_animationController.value * 2 * math.pi));
+  Gradient get borderGradient => LinearGradient(
+      colors: BaseColors.grad1,
+      transform: GradientRotation(_animationController.value * 2 * math.pi));
   @override
   void dispose() {
     _animationController.dispose();
