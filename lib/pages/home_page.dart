@@ -1,4 +1,6 @@
 import 'package:custom_widgets/widgets/angular_gradient_button.dart';
+import 'package:custom_widgets/widgets/loading_animation.dart';
+import 'package:custom_widgets/widgets/rotating_arcs.dart';
 import 'package:custom_widgets/widgets/rotating_gradient_arc.dart';
 import 'package:flutter/material.dart';
 
@@ -44,5 +46,9 @@ List<Demo> widgetsDemo = [
       name: "Rotating Gradient Arc"),
   Demo(
       builder: (context) => const AngularGradientButton(),
-      name: "Angular Gragient Button")
+      name: "Angular Gragient Button"),
+  Demo(builder: (context) => const RotatingArcs(), name: "Rotating Arcs"),
+  Demo(
+      builder: (context) => const LoadingAnimation(),
+      name: "Loading Animation"),
 ];

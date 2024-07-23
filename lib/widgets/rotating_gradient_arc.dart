@@ -64,7 +64,7 @@ class GradientArcPainter extends CustomPainter {
     final double radius = (size.width / 2);
     final Offset center = Offset(size.width / 2, size.height / 2);
 
-    // Grey circle
+    // Grey circle paint definition and drawing
     final Paint circlePaint = Paint()
       ..color = const Color.fromARGB(255, 81, 78, 78)
       ..style = PaintingStyle.stroke
@@ -88,6 +88,7 @@ class GradientArcPainter extends CustomPainter {
         3.14 / 4,
       );
 
+    //draw path with the gradient paint
     canvas.drawPath(arcPath, gradientPaint);
   }
 

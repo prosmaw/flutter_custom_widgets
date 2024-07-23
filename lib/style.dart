@@ -10,4 +10,9 @@ class BaseColors {
     Colors.purple,
     Colors.pink
   ];
+  static const List<Color> arcsColors = [
+    Colors.blue,
+    Colors.yellow,
+    Colors.red
+  ];
 }

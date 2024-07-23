@@ -47,11 +47,18 @@ class BorderPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    //main bound
     final rect = Rect.fromLTWH(0, 0, size.width, size.height);
+
+    //rounded rectangle definition
     final rrect = RRect.fromRectAndRadius(rect, radius);
+
+    // paint definition with the gadient
     _paint
       ..strokeWidth = strokeWidth
       ..shader = gradient.createShader(rect);
+
+    // draw the rounded rectangle with the paint
     canvas.drawRRect(rrect, _paint);
   }
 
