@@ -2,6 +2,7 @@ import 'package:custom_widgets/widgets/angular_gradient_button.dart';
 import 'package:custom_widgets/widgets/bubles.dart';
 import 'package:custom_widgets/widgets/card_spring_animation.dart';
 import 'package:custom_widgets/widgets/cards_cascade_out.dart';
+import 'package:custom_widgets/widgets/dots_loading.dart';
 import 'package:custom_widgets/widgets/loading_animation.dart';
 import 'package:custom_widgets/widgets/rotating_arcs.dart';
 import 'package:custom_widgets/widgets/rotating_gradient_arc.dart';
@@ -59,4 +60,6 @@ List<Demo> widgetsDemo = [
       name: "Fane out Cards"),
   Demo(
       builder: (context) => const CardsCascadeOut(), name: "Cascade out cards"),
+  //Demo(builder: (context) => const Bubles(), name: "Bubles"),
+  Demo(builder: (context) => const DotsLoading(), name: "Dots  Loading")
 ];
