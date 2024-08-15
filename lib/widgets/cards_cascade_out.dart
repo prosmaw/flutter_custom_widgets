@@ -11,7 +11,6 @@ class CardsCascadeOut extends StatefulWidget {
 
 class _CardsCascadeOutState extends State<CardsCascadeOut>
     with TickerProviderStateMixin {
-  bool ishold = false;
   List<double> cardsLeftMoves = [-75, -75, -75, -75, -75];
   List<double> endAngles = [-0.4, -0.3, -0.2, -0.1, 0];
   List<double> beginAngles = [-0.4, -0.3, -0.2, 0.1, 0];

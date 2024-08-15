@@ -11,10 +11,11 @@ class CardSpringAnimation extends StatefulWidget {
 
 class _CardSpringAnimationState extends State<CardSpringAnimation>
     with TickerProviderStateMixin {
-  bool ishold = false;
+  late AnimationController cardsAnimation = AnimationController(
+      vsync: this, duration: const Duration(milliseconds: 300));
   List<double> cardsMoves = [-75, -75, -75, -75];
   List<double> endAngles = [-0.3, -0.2, -0.1, 0];
-  List<double> beginAngles = [-0.3, -0.2, 0.1, 0];
+  List<double> beginAngles = [-0.3, -0.2, -0.1, 0];
   int pressCount = 0;
 
   void _onLongPress() {
@@ -23,10 +24,8 @@ class _CardSpringAnimationState extends State<CardSpringAnimation>
       setState(() {
         cardsMoves[3] = -95;
         for (int i = 2; i >= 0; i--) {
-          cardsMoves[i] = cardsMoves[i + 1] + 40;
-        }
-        for (int i = 0; i < endAngles.length - 1; i++) {
-          endAngles[i] = 0.2;
+          cardsMoves[i] = cardsMoves[i + 1] + 30;
+          endAngles[i] = endAngles[i + 1] + 0.2;
         }
       });
     } else if (pressCount == 1) {
@@ -101,5 +100,43 @@ class _CardSpringAnimationState extends State<CardSpringAnimation>
         ),
       ),
     );
+  }
+}
+
+class FlowCardDelegate extends FlowDelegate {
+  final Animation<double> cardsAnimation;
+  FlowCardDelegate({required this.cardsAnimation})
+      : super(repaint: cardsAnimation);
+  @override
+  void paintChildren(FlowPaintingContext context) {
+    int childCount = context.childCount;
+    double baseX =
+        (context.size.width / 2) - context.getChildSize(0)!.width / 2;
+    double y = (context.size.height / 2) - context.getChildSize(0)!.height;
+
+    if (cardsAnimation.status == AnimationStatus.forward) {
+      double firstx = (context.size.width / 2) - 5;
+      double firstz = 0.6;
+
+      for (int i = 0; i < childCount; i++) {
+        context.paintChild(i,
+            transform: Matrix4.translationValues(
+                (firstx - (30 * i)) * cardsAnimation.value,
+                y,
+                (firstz - (0.2 * i) * cardsAnimation.value)));
+      }
+    } else {
+      double firstz = -0.3;
+      for (int i = 0; i < childCount; i++) {
+        context.paintChild(i,
+            transform: Matrix4.translationValues((baseX) * cardsAnimation.value,
+                y, (firstz + (0.1 * i) * cardsAnimation.value)));
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(FlowCardDelegate oldDelegate) {
+    return cardsAnimation != oldDelegate.cardsAnimation;
   }
 }
