@@ -10,7 +10,7 @@ class DotsLoading extends StatefulWidget {
 class _DotsLoadingState extends State<DotsLoading>
     with TickerProviderStateMixin {
   late final AnimationController controller = AnimationController(
-    duration: const Duration(milliseconds: 300),
+    duration: const Duration(milliseconds: 250),
     vsync: this,
   )..repeat(reverse: true);
   int count = 0;
@@ -19,8 +19,8 @@ class _DotsLoadingState extends State<DotsLoading>
   void initState() {
     super.initState();
     controller.addStatusListener((status) {
-      if (status == AnimationStatus.reverse && count < 3) {
-        Future.delayed(const Duration(milliseconds: 300), () {
+      if (status == AnimationStatus.reverse && count < 2) {
+        Future.delayed(const Duration(milliseconds: 250), () {
           if (mounted) {
             setState(() {
               count++;
@@ -28,12 +28,8 @@ class _DotsLoadingState extends State<DotsLoading>
           }
         });
       } else if (status != AnimationStatus.reverse && count == 2) {
-        Future.delayed(const Duration(milliseconds: 100), () {
-          if (mounted) {
-            setState(() {
-              count = 0;
-            });
-          }
+        setState(() {
+          count = 0;
         });
       }
       // print("anim count: $count");
@@ -56,8 +52,7 @@ class _DotsLoadingState extends State<DotsLoading>
         ),
         body: Center(
           child: Flow(
-              delegate: FlowDotDelegate(
-                  animation: controller, childWidth: 30, count: count),
+              delegate: FlowDotDelegate(animation: controller, count: count),
               children: List.generate(
                   3,
                   (index) => Container(
@@ -72,25 +67,25 @@ class _DotsLoadingState extends State<DotsLoading>
 
 class FlowDotDelegate extends FlowDelegate {
   Animation<double> animation;
-  double childWidth;
   int count;
-  FlowDotDelegate(
-      {required this.animation, required this.childWidth, required this.count})
+  FlowDotDelegate({required this.animation, required this.count})
       : super(repaint: animation);
   @override
   void paintChildren(FlowPaintingContext context) {
-    double topPosition = 10;
+    //double topPosition = 10;
+    Animation<double> topPosition;
+    double childWidth = context.getChildSize(0)!.width;
     double spacing = 15 + childWidth;
     double width = context.size.width;
     for (int i = 0; i < context.childCount; ++i) {
       if (count == i) {
-        topPosition = 10;
+        topPosition = Tween<double>(begin: 10, end: 0).animate(animation);
       } else {
-        topPosition = 0;
+        topPosition = Tween<double>(begin: 10, end: 10).animate(animation);
       }
       context.paintChild(i,
           transform: Matrix4.translationValues(
-              width / 2 + (i * spacing), topPosition * animation.value, 0));
+              width / 2 + (i * spacing), topPosition.value, 0));
     }
   }
 

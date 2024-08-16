@@ -1,5 +1,4 @@
 import 'package:custom_widgets/widgets/angular_gradient_button.dart';
-import 'package:custom_widgets/widgets/bubles.dart';
 import 'package:custom_widgets/widgets/card_spring_animation.dart';
 import 'package:custom_widgets/widgets/cards_cascade_out.dart';
 import 'package:custom_widgets/widgets/dots_loading.dart';
