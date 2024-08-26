@@ -48,20 +48,18 @@ class _DotsLoadingState extends State<DotsLoading>
     //double width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Bubles Loading"),
+          title: const Text("Dots Loading"),
         ),
-        body: Center(
-          child: Flow(
-              delegate: FlowDotDelegate(animation: controller, count: count),
-              children: List.generate(
-                  3,
-                  (index) => Container(
-                        height: 30,
-                        width: 30,
-                        decoration: const BoxDecoration(
-                            color: Colors.blue, shape: BoxShape.circle),
-                      )).toList()),
-        ));
+        body: Flow(
+            delegate: FlowDotDelegate(animation: controller, count: count),
+            children: List.generate(
+                3,
+                (index) => Container(
+                      height: 30,
+                      width: 30,
+                      decoration: const BoxDecoration(
+                          color: Colors.blue, shape: BoxShape.circle),
+                    )).toList()));
   }
 }
 
@@ -75,8 +73,10 @@ class FlowDotDelegate extends FlowDelegate {
     //double topPosition = 10;
     Animation<double> topPosition;
     double childWidth = context.getChildSize(0)!.width;
+    int childCount = context.childCount;
     double spacing = 15 + childWidth;
     double width = context.size.width;
+    double start = width / 2 - (childCount * spacing) / 2;
     for (int i = 0; i < context.childCount; ++i) {
       if (count == i) {
         topPosition = Tween<double>(begin: 10, end: 0).animate(animation);
@@ -85,7 +85,7 @@ class FlowDotDelegate extends FlowDelegate {
       }
       context.paintChild(i,
           transform: Matrix4.translationValues(
-              width / 2 + (i * spacing), topPosition.value, 0));
+              start + (i * spacing), topPosition.value, 0));
     }
   }
 
