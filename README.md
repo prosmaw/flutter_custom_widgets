@@ -14,7 +14,7 @@ A list of widgets I find  on X made with other frameworks that I decided to repr
 
 |                                             Dots Loading                                                                |   |    |
 | :---------------------------------------------------------------------------------------------------------------------: |:-----------------------------------------------------------------------------------------------------------------------:| :----------------------------------------------------------------------------------------------------------------------:|
-|  ![dots_loading](https://github.com/user-attachments/assets/17b06c47-00dd-43d8-9a1b-1fb15a4abf37)                       |   |    |
+|  ![dots_loading](https://github.com/user-attachments/assets/aa3a9185-06d0-47ce-900b-5a4ee6e571cb)                       |   |    |
 | [[SOURCE](lib/widgets/dots_loading.dart)] [[Inspiration](Bank of America mobile app)]                                   |   |    |
 
 
@@ -26,7 +26,8 @@ A new Flutter project.
 
 
 
-This project is a starting point for a Flutter application.
+
+This project is a starting point for a Flutter application. 
 
 A few resources to get you started if this is your first Flutter project:
 
