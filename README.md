@@ -9,10 +9,16 @@ A list of widgets I find  on X made with other frameworks that I decided to repr
 |                                             Loading Animation                                                           |                          Fane out animation                                                                             |                                                   Cascade out animation                                                 |
 | :---------------------------------------------------------------------------------------------------------------------: |:-----------------------------------------------------------------------------------------------------------------------:| :----------------------------------------------------------------------------------------------------------------------:|
 |  ![loading-animation](https://github.com/user-attachments/assets/b57e3cc6-c09a-4f55-9a16-bcb403852d00)                  |  ![fan_out](https://github.com/user-attachments/assets/ee0e2c27-0fb4-4f43-bc49-d9fd64db90ff)                            |  ![casacade_out](https://github.com/user-attachments/assets/a41065c2-5eb8-4bc4-bc7e-fb8d242b35a1)                       |
-| [[SOURCE](lib/widgets/loading_animation.dart)] [[Inspiration](https://x.com/sucodeee/status/1814638797331570854)]       |  [[SOURCE](lib/widgets/card_spring_animation.dart)] [[Inspiration](https://x.com/jmtrivedi/status/1510014145126612993)] |  [[SOURCE](lib/widgets/cards_cascade_out.dart)] [[Inspiration](https://x.com/jmtrivedi/status/1510358859424034818)] |
+| [[SOURCE](lib/widgets/loading_animation.dart)] [[Inspiration](https://x.com/sucodeee/status/1814638797331570854)]       |  [[SOURCE](lib/widgets/card_spring_animation.dart)] [[Inspiration](https://x.com/jmtrivedi/status/1510014145126612993)] |  [[SOURCE](lib/widgets/cards_cascade_out.dart)] [[Inspiration](https://x.com/jmtrivedi/status/1510358859424034818)]     |
 
 
-A new Flutter project.
+|                                             Dots Loading                                                                |   |    |
+| :---------------------------------------------------------------------------------------------------------------------: |:-----------------------------------------------------------------------------------------------------------------------:| :----------------------------------------------------------------------------------------------------------------------:|
+|  ![dots_loading](https://github.com/user-attachments/assets/17b06c47-00dd-43d8-9a1b-1fb15a4abf37)                       |   |    |
+| [[SOURCE](lib/widgets/dots_loading.dart)] [[Inspiration](Bank of America mobile app)]                                   |   |    |
+
+
+A new Flutter project.  
 
 ## Getting Started
 
