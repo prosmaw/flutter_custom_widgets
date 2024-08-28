@@ -13,7 +13,7 @@ class _CardSpringAnimationState extends State<CardSpringAnimation>
     with TickerProviderStateMixin {
   late AnimationController cardsAnimation = AnimationController(
       vsync: this, duration: const Duration(milliseconds: 300));
-  List<double> cardsMoves = [-75, -75, -75, -75];
+  List<double> cardsMoves = List.filled(4, -75);
   List<double> endAngles = [-0.3, -0.2, -0.1, 0];
   List<double> beginAngles = [-0.3, -0.2, -0.1, 0];
   int pressCount = 0;
@@ -55,7 +55,7 @@ class _CardSpringAnimationState extends State<CardSpringAnimation>
             Future.delayed(
                 const Duration(milliseconds: 300),
                 () => setState(() {
-                      cardsMoves = [-75, -75, -75, -75];
+                      cardsMoves = List.filled(4, -75);
                       endAngles = [-0.3, -0.2, -0.1, 0];
                     }));
             Future.delayed(

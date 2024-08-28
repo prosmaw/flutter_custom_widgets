@@ -11,17 +11,14 @@ class CardsCascadeOut extends StatefulWidget {
 
 class _CardsCascadeOutState extends State<CardsCascadeOut>
     with TickerProviderStateMixin {
-  List<double> cardsLeftMoves = [-75, -75, -75, -75, -75];
+  List<double> cardsLeftMoves = List.filled(5, -75);
   List<double> endAngles = [-0.4, -0.3, -0.2, -0.1, 0];
-  List<double> beginAngles = [-0.4, -0.3, -0.2, 0.1, 0];
-  List<double> cardsTopMoves = [-200, -200, -200, -200, -200];
-  List<Size> cardsSize = [
+  List<double> beginAngles = [-0.4, -0.3, -0.2, -0.1, 0];
+  List<double> cardsTopMoves = List.filled(5, -200);
+  List<Size> cardsSize = List.filled(
+    5,
     const Size(150, 200),
-    const Size(150, 200),
-    const Size(150, 200),
-    const Size(150, 200),
-    const Size(150, 200),
-  ];
+  );
 
   void _onLongPress(double width, double height) {
     setState(() {
@@ -57,16 +54,13 @@ class _CardsCascadeOutState extends State<CardsCascadeOut>
           },
           onLongPressEnd: (details) {
             setState(() {
-              cardsLeftMoves = [-75, -75, -75, -75, -75];
+              cardsLeftMoves = List.filled(5, -75);
               endAngles = [-0.4, -0.3, -0.2, -0.1, 0];
-              cardsTopMoves = [-200, -200, -200, -200, -200];
-              cardsSize = [
+              cardsTopMoves = List.filled(5, -200);
+              cardsSize = List.filled(
+                5,
                 const Size(150, 200),
-                const Size(150, 200),
-                const Size(150, 200),
-                const Size(150, 200),
-                const Size(150, 200),
-              ];
+              );
             });
           },
           child: SizedBox(
