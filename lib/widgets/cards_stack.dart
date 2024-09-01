@@ -9,7 +9,7 @@ class CardsStack extends StatefulWidget {
 
 class _CardsStackState extends State<CardsStack> with TickerProviderStateMixin {
   late AnimationController controller = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 1000));
+      vsync: this, duration: const Duration(milliseconds: 500));
   bool expand = false;
   double cardHeight = 100;
 
@@ -30,15 +30,19 @@ class _CardsStackState extends State<CardsStack> with TickerProviderStateMixin {
         body: GestureDetector(
           onTap: () {
             if (expand) {
-              setState(() {
-                expand = false;
-              });
-              controller.reverse();
+              controller.animateBack(0.0,
+                  curve: Curves.bounceOut,
+                  duration: const Duration(milliseconds: 500));
+              Future.delayed(
+                  const Duration(milliseconds: 500),
+                  () => setState(() {
+                        expand = false;
+                      }));
             } else if (!expand) {
               setState(() {
                 expand = true;
               });
-              controller.forward();
+              controller.animateTo(1, curve: Curves.bounceOut);
             }
           },
           child: Flow(
