@@ -12,15 +12,16 @@ A list of widgets I find  on X made with other frameworks that I decided to repr
 | [[SOURCE](lib/widgets/loading_animation.dart)] [[Inspiration](https://x.com/sucodeee/status/1814638797331570854)]       |  [[SOURCE](lib/widgets/card_spring_animation.dart)] [[Inspiration](https://x.com/jmtrivedi/status/1510014145126612993)] |  [[SOURCE](lib/widgets/cards_cascade_out.dart)] [[Inspiration](https://x.com/jmtrivedi/status/1510358859424034818)]     |
 
 
-|                                             Dots Loading                                                                |   |    |
+|                                             Dots Loading                                                                |  Stack cards                                                                                                            |    |
 | :---------------------------------------------------------------------------------------------------------------------: |:-----------------------------------------------------------------------------------------------------------------------:| :----------------------------------------------------------------------------------------------------------------------:|
-|  ![dots_loading](https://github.com/user-attachments/assets/aa3a9185-06d0-47ce-900b-5a4ee6e571cb)                       |   |    |
-| [[SOURCE](lib/widgets/dots_loading.dart)] [[Inspiration](Bank of America mobile app)]                                   |   |    |
+|  ![dots_loading](https://github.com/user-attachments/assets/aa3a9185-06d0-47ce-900b-5a4ee6e571cb)                       | ![stack_cards](https://github.com/user-attachments/assets/d2993df1-57dd-48c0-be8c-1b9d7b86a4f4)                         |    |
+| [[SOURCE](lib/widgets/dots_loading.dart)] [[Inspiration](Bank of America mobile app)]                                   | [[SOURCE](lib/widgets/cards_stack.dart)] [[Inspiration](https://x.com/nitishkmrk/status/1822884723485708550)]       |    |
 
 
 A new Flutter project.  
 
 ## Getting Started
+
 
 
 
