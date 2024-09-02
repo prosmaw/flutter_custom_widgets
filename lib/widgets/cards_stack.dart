@@ -8,9 +8,11 @@ class CardsStack extends StatefulWidget {
 }
 
 class _CardsStackState extends State<CardsStack> with TickerProviderStateMixin {
-  late AnimationController controller = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 500));
+  Duration duration = const Duration(milliseconds: 800);
+  late AnimationController controller =
+      AnimationController(vsync: this, duration: duration);
   bool expand = false;
+  bool resize = false;
   double cardHeight = 100;
 
   @override
@@ -22,7 +24,8 @@ class _CardsStackState extends State<CardsStack> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    //double height = MediaQuery.of(context).size.height;
+    double cardWidth = width * 0.8;
     return Scaffold(
         appBar: AppBar(
           title: const Text("Stack cards"),
@@ -30,32 +33,40 @@ class _CardsStackState extends State<CardsStack> with TickerProviderStateMixin {
         body: GestureDetector(
           onTap: () {
             if (expand) {
+              setState(() {
+                resize = false;
+              });
               controller.animateBack(0.0,
-                  curve: Curves.bounceOut,
-                  duration: const Duration(milliseconds: 500));
+                  curve: Curves.elasticOut, duration: duration);
               Future.delayed(
-                  const Duration(milliseconds: 500),
+                  duration,
                   () => setState(() {
                         expand = false;
                       }));
             } else if (!expand) {
               setState(() {
                 expand = true;
+                resize = true;
               });
-              controller.animateTo(1, curve: Curves.bounceOut);
+              controller.animateTo(1, curve: Curves.elasticOut);
             }
           },
-          child: Flow(
-            delegate: FlowStackDelegate(
-                animation: controller,
-                screenHeight: height,
-                screnWidth: width,
-                expand: expand),
-            children: List.generate(
-                3,
-                (index) => Container(
+          child: Center(
+            child: SizedBox(
+              width: width,
+              height: expand ? 380 : 140,
+              child: Align(
+                alignment: Alignment.center,
+                child: Flow(
+                  delegate: FlowStackDelegate(
+                      animation: controller,
+                      screnWidth: width,
+                      expand: expand,
+                      resize: resize),
+                  children: List.generate(3, (index) {
+                    return Container(
                       height: cardHeight,
-                      width: width * 0.8,
+                      width: resize ? cardWidth : cardWidth - (index * 10),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(
@@ -69,7 +80,11 @@ class _CardsStackState extends State<CardsStack> with TickerProviderStateMixin {
                                 spreadRadius: 1,
                                 blurRadius: 8)
                           ]),
-                    )),
+                    );
+                  }),
+                ),
+              ),
+            ),
           ),
         ));
   }
@@ -77,14 +92,13 @@ class _CardsStackState extends State<CardsStack> with TickerProviderStateMixin {
 
 class FlowStackDelegate extends FlowDelegate {
   Animation<double> animation;
-  double screenHeight;
   double screnWidth;
-  bool expand;
+  bool expand, resize;
 
   FlowStackDelegate(
       {required this.animation,
-      required this.screenHeight,
       required this.screnWidth,
+      required this.resize,
       required this.expand})
       : super(repaint: animation);
   @override
@@ -92,20 +106,32 @@ class FlowStackDelegate extends FlowDelegate {
     int childCount = context.childCount;
     double gap = context.getChildSize(0)!.height + 30;
     double childHeight = context.getChildSize(0)!.height;
-    double firstPos = (screenHeight / 2 - childHeight) - gap;
+    //flow height
+    double height = expand ? 360 : 120;
+    double firstPos = (height / 2 - (childHeight / 2)) - gap;
     Animation<double> yAnim;
+    double x;
+
     for (int i = childCount - 1; i >= 0; i--) {
-      double defY = (screenHeight / 2 - childHeight) + (10 * i).toDouble();
+      //default y
+      double defY = (height / 2 - (childHeight / 2)) + (10 * i).toDouble();
+
       if (expand) {
         yAnim = Tween<double>(begin: defY, end: firstPos + (i * gap))
             .animate(animation);
       } else {
         yAnim = Tween(begin: defY, end: defY).animate(animation);
       }
+      x = resize ? (screnWidth * 0.05) : (screnWidth * 0.05) + (i * 5);
       context.paintChild(i,
-          transform:
-              Matrix4.translationValues(screnWidth * 0.1, yAnim.value, 0));
+          transform: Matrix4.translationValues(x, yAnim.value, 0));
     }
+  }
+
+  @override
+  Size getSize(BoxConstraints constraints) {
+    //slightly widder than the children for the shadow to appear
+    return Size(screnWidth * 0.9, double.infinity);
   }
 
   @override
