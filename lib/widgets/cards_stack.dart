@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
 
 class CardsStack extends StatefulWidget {
   const CardsStack({super.key});
@@ -8,11 +9,8 @@ class CardsStack extends StatefulWidget {
 }
 
 class _CardsStackState extends State<CardsStack> with TickerProviderStateMixin {
-  Duration duration = const Duration(milliseconds: 800);
-  late AnimationController controller =
-      AnimationController(vsync: this, duration: duration);
+  late AnimationController controller = AnimationController(vsync: this);
   bool expand = false;
-  bool resize = false;
   double cardHeight = 100;
 
   @override
@@ -24,49 +22,29 @@ class _CardsStackState extends State<CardsStack> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    //double height = MediaQuery.of(context).size.height;
     double cardWidth = width * 0.8;
     return Scaffold(
         appBar: AppBar(
           title: const Text("Stack cards"),
         ),
         body: GestureDetector(
-          onTap: () {
-            if (expand) {
-              setState(() {
-                resize = false;
-              });
-              controller.animateBack(0.0,
-                  curve: Curves.elasticOut, duration: duration);
-              Future.delayed(
-                  duration,
-                  () => setState(() {
-                        expand = false;
-                      }));
-            } else if (!expand) {
-              setState(() {
-                expand = true;
-                resize = true;
-              });
-              controller.animateTo(1, curve: Curves.elasticOut);
-            }
-          },
+          onTap: onCardTap,
           child: Center(
             child: SizedBox(
               width: width,
-              height: expand ? 380 : 140,
+              height: double.infinity,
               child: Align(
                 alignment: Alignment.center,
                 child: Flow(
                   delegate: FlowStackDelegate(
-                      animation: controller,
-                      screnWidth: width,
-                      expand: expand,
-                      resize: resize),
+                    animation: controller,
+                    screnWidth: width,
+                    expand: expand,
+                  ),
                   children: List.generate(3, (index) {
                     return Container(
                       height: cardHeight,
-                      width: resize ? cardWidth : cardWidth - (index * 10),
+                      width: expand ? cardWidth : cardWidth - (index * 10),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(
@@ -88,43 +66,55 @@ class _CardsStackState extends State<CardsStack> with TickerProviderStateMixin {
           ),
         ));
   }
+
+  void onCardTap() {
+    if (expand) {
+      setState(() {
+        expand = false;
+      });
+      final SpringSimulation springSimulation = SpringSimulation(
+          const SpringDescription(mass: 1, stiffness: 90, damping: 8.0),
+          1.0,
+          0.0,
+          0.0);
+      controller.animateWith(springSimulation);
+    } else if (!expand) {
+      setState(() {
+        expand = true;
+      });
+      final SpringSimulation springSimulation = SpringSimulation(
+          const SpringDescription(mass: 1, stiffness: 90, damping: 8.0),
+          0.0,
+          1.0,
+          0.0);
+      controller.animateWith(springSimulation);
+    }
+  }
 }
 
 class FlowStackDelegate extends FlowDelegate {
   Animation<double> animation;
   double screnWidth;
-  bool expand, resize;
+  bool expand;
 
   FlowStackDelegate(
-      {required this.animation,
-      required this.screnWidth,
-      required this.resize,
-      required this.expand})
+      {required this.animation, required this.screnWidth, required this.expand})
       : super(repaint: animation);
   @override
   void paintChildren(FlowPaintingContext context) {
     int childCount = context.childCount;
-    double gap = context.getChildSize(0)!.height + 30;
+    double gap = context.getChildSize(0)!.height + 15;
     double childHeight = context.getChildSize(0)!.height;
-    //flow height
-    double height = expand ? 360 : 120;
+    double height = context.size.height - 20;
     double firstPos = (height / 2 - (childHeight / 2)) - gap;
-    Animation<double> yAnim;
-    double x;
+    double x, y;
 
     for (int i = childCount - 1; i >= 0; i--) {
       //default y
       double defY = (height / 2 - (childHeight / 2)) + (10 * i).toDouble();
-
-      if (expand) {
-        yAnim = Tween<double>(begin: defY, end: firstPos + (i * gap))
-            .animate(animation);
-      } else {
-        yAnim = Tween(begin: defY, end: defY).animate(animation);
-      }
-      x = resize ? (screnWidth * 0.05) : (screnWidth * 0.05) + (i * 5);
-      context.paintChild(i,
-          transform: Matrix4.translationValues(x, yAnim.value, 0));
+      y = defY + (firstPos + (i * gap) - defY) * animation.value;
+      x = expand ? (screnWidth * 0.05) : (screnWidth * 0.05) + (i * 5);
+      context.paintChild(i, transform: Matrix4.translationValues(x, y, 0));
     }
   }
 
