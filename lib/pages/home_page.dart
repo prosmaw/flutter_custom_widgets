@@ -6,6 +6,7 @@ import 'package:custom_widgets/widgets/dots_loading.dart';
 import 'package:custom_widgets/widgets/loading_animation.dart';
 import 'package:custom_widgets/widgets/rotating_arcs.dart';
 import 'package:custom_widgets/widgets/rotating_gradient_arc.dart';
+import 'package:custom_widgets/widgets/stack_list.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,12 +56,13 @@ List<Demo> widgetsDemo = [
   Demo(
       builder: (context) => const LoadingAnimation(),
       name: "Loading Animation"),
+  Demo(builder: (context) => const DotsLoading(), name: "Dots  Loading"),
   Demo(
       builder: (context) => const CardSpringAnimation(),
       name: "Fane out Cards"),
   Demo(
       builder: (context) => const CardsCascadeOut(), name: "Cascade out cards"),
   Demo(builder: (context) => const CardsStack(), name: "Stack cards"),
+  Demo(builder: (context) => const StackList(), name: "Stack List"),
   //Demo(builder: (context) => const Bubles(), name: "Bubles"),
-  Demo(builder: (context) => const DotsLoading(), name: "Dots  Loading")
 ];
