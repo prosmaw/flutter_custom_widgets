@@ -3,6 +3,7 @@ import 'package:custom_widgets/widgets/card_spring_animation.dart';
 import 'package:custom_widgets/widgets/cards_cascade_out.dart';
 import 'package:custom_widgets/widgets/cards_stack.dart';
 import 'package:custom_widgets/widgets/dots_loading.dart';
+import 'package:custom_widgets/widgets/jump_slide.dart';
 import 'package:custom_widgets/widgets/loading_animation.dart';
 import 'package:custom_widgets/widgets/rotating_arcs.dart';
 import 'package:custom_widgets/widgets/rotating_gradient_arc.dart';
@@ -57,6 +58,7 @@ List<Demo> widgetsDemo = [
       builder: (context) => const LoadingAnimation(),
       name: "Loading Animation"),
   Demo(builder: (context) => const DotsLoading(), name: "Dots  Loading"),
+  Demo(builder: (context) => const JumpSlide(), name: "Jump and Slide"),
   Demo(
       builder: (context) => const CardSpringAnimation(),
       name: "Fane out Cards"),

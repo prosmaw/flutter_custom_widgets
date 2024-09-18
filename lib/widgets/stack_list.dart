@@ -20,15 +20,8 @@ class _StackListState extends State<StackList> {
       body: SizedBox(
         width: width,
         height: height,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-                child: ListView.builder(
-                    itemCount: 5,
-                    itemBuilder: (context, index) => const StackItem()))
-          ],
-        ),
+        child: ListView.builder(
+            itemCount: 5, itemBuilder: (context, index) => const StackItem()),
       ),
     );
   }
