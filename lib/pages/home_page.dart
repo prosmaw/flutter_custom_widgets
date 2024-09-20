@@ -1,5 +1,5 @@
 import 'package:custom_widgets/widgets/angular_gradient_button.dart';
-import 'package:custom_widgets/widgets/card_spring_animation.dart';
+import 'package:custom_widgets/widgets/card_fan_out_animation.dart';
 import 'package:custom_widgets/widgets/cards_cascade_out.dart';
 import 'package:custom_widgets/widgets/cards_stack.dart';
 import 'package:custom_widgets/widgets/dots_loading.dart';
@@ -59,9 +59,7 @@ List<Demo> widgetsDemo = [
       name: "Loading Animation"),
   Demo(builder: (context) => const DotsLoading(), name: "Dots  Loading"),
   Demo(builder: (context) => const JumpSlide(), name: "Jump and Slide"),
-  Demo(
-      builder: (context) => const CardSpringAnimation(),
-      name: "Fane out Cards"),
+  Demo(builder: (context) => const FanOutAnimation(), name: "Fane out Cards"),
   Demo(
       builder: (context) => const CardsCascadeOut(), name: "Cascade out cards"),
   Demo(builder: (context) => const CardsStack(), name: "Stack cards"),
