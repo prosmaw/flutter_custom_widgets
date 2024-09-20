@@ -2,14 +2,14 @@ import 'package:custom_widgets/widgets/card_box.dart';
 import 'package:flutter/material.dart';
 //import 'dart:math' as math;
 
-class CardSpringAnimation extends StatefulWidget {
-  const CardSpringAnimation({super.key});
+class FanOutAnimation extends StatefulWidget {
+  const FanOutAnimation({super.key});
 
   @override
-  State<CardSpringAnimation> createState() => _CardSpringAnimationState();
+  State<FanOutAnimation> createState() => _FanOutAnimationState();
 }
 
-class _CardSpringAnimationState extends State<CardSpringAnimation>
+class _FanOutAnimationState extends State<FanOutAnimation>
     with TickerProviderStateMixin {
   late AnimationController cardsAnimation = AnimationController(
       vsync: this, duration: const Duration(milliseconds: 300));
