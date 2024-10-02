@@ -13,30 +13,31 @@ class BlurredList extends StatefulWidget {
 class _BlurredListState extends State<BlurredList>
     with TickerProviderStateMixin {
   late AnimationController positionController = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 500));
+      vsync: this, duration: const Duration(milliseconds: 250));
 
   Constants constants = Constants();
   double cardHeight = 100;
   double boxHeight = 320;
   double primaryBoxHeight = 380;
-  int next = 0;
+  int next = -1;
 
   List<Animation<double>> cardsPosition = [];
 
   List<BlurredCard> blurredCards = [];
 
   void updateList(double width) async {
-    if (blurredCards.length >= 3) {
+    if (blurredCards.length >= 3 &&
+        next < constants.blurredListComponent.length - 1) {
       setState(() {
-        for (int i = 0; i < 3; i++) {
+        next += 1;
+        for (int i = 0; i < cardsPosition.length; i++) {
           cardsPosition[i] = Tween<double>(
-                  begin: i * (cardHeight + 10),
-                  end: (i - 1) * (cardHeight + 10))
+                  begin: i * (cardHeight + 5), end: (i - 1) * (cardHeight + 5))
               .animate(positionController);
         }
 
         cardsPosition.add(Tween<double>(
-                begin: 3 * (cardHeight + 10), end: (3 - 1) * (cardHeight + 10))
+                begin: 3 * (cardHeight + 5), end: (3 - 1) * (cardHeight + 5))
             .animate(positionController));
 
         blurredCards.add(BlurredCard(
@@ -48,16 +49,16 @@ class _BlurredListState extends State<BlurredList>
         ));
       });
 
-      await positionController.animateTo(1);
-
+      await positionController.forward(from: 0);
+      //await positionController.animateWith(springSimulation);
       setState(() {
         blurredCards.removeAt(0);
         cardsPosition.removeAt(0);
-        next += 1;
       });
-    } else {
+    } else if (next < constants.blurredListComponent.length - 1) {
       setState(() {
-        cardsPosition.add(AlwaysStoppedAnimation(next * (cardHeight + 10)));
+        next += 1;
+        cardsPosition.add(AlwaysStoppedAnimation(next * (cardHeight + 5)));
 
         blurredCards.add(BlurredCard(
           width: width,
@@ -66,10 +67,14 @@ class _BlurredListState extends State<BlurredList>
           ref: constants.blurredListComponent[next]["ref"],
           height: cardHeight,
         ));
-
-        next += 1;
       });
     }
+  }
+
+  @override
+  void dispose() {
+    positionController.dispose();
+    super.dispose();
   }
 
   @override
@@ -79,37 +84,41 @@ class _BlurredListState extends State<BlurredList>
       appBar: AppBar(
         title: const Text("Blurred List"),
       ),
-      body: Center(
-          child: SizedBox(
-        height: primaryBoxHeight,
-        width: width,
-        child: Stack(
-          children: [
-            ...List.generate(blurredCards.length, (index) {
-              return Positioned(
-                  left: width * 0.1,
-                  top: cardsPosition[index].value,
-                  child: blurredCards[index]);
-            }),
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: InkWell(
-                  onTap: () {
-                    updateList(width);
-                  },
-                  child: const CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.black,
-                    child: Icon(
-                      Icons.add,
-                      size: 50,
-                      color: Colors.white,
-                    ),
-                  ),
-                ))
-          ],
-        ),
-      )),
+      body: AnimatedBuilder(
+          animation: positionController,
+          builder: (context, child) {
+            return Center(
+                child: SizedBox(
+              height: primaryBoxHeight,
+              width: width,
+              child: Stack(
+                children: [
+                  ...List.generate(blurredCards.length, (index) {
+                    return Positioned(
+                        left: width * 0.07,
+                        top: cardsPosition[index].value,
+                        child: blurredCards[index]);
+                  }),
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: GestureDetector(
+                        onTap: () {
+                          updateList(width);
+                        },
+                        child: const CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.black,
+                          child: Icon(
+                            Icons.add,
+                            size: 50,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ))
+                ],
+              ),
+            ));
+          }),
     );
   }
 }
@@ -133,9 +142,9 @@ class BlurredCard extends StatefulWidget {
 class _BlurredCardState extends State<BlurredCard>
     with TickerProviderStateMixin {
   late AnimationController blurController = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 500));
+      vsync: this, duration: const Duration(milliseconds: 400));
   late Animation<double> sigmaTween =
-      Tween<double>(begin: 5.0, end: 0).animate(blurController);
+      Tween<double>(begin: 20.0, end: 0).animate(blurController);
   late Animation<double> opacityAnimation =
       Tween<double>(begin: 0, end: 1).animate(blurController);
 
