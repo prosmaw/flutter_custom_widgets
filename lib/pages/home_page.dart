@@ -1,4 +1,5 @@
 import 'package:custom_widgets/widgets/angular_gradient_button.dart';
+import 'package:custom_widgets/widgets/blurred_list.dart';
 import 'package:custom_widgets/widgets/card_fan_out_animation.dart';
 import 'package:custom_widgets/widgets/cards_cascade_out.dart';
 import 'package:custom_widgets/widgets/cards_stack.dart';
@@ -64,5 +65,5 @@ List<Demo> widgetsDemo = [
       builder: (context) => const CardsCascadeOut(), name: "Cascade out cards"),
   Demo(builder: (context) => const CardsStack(), name: "Stack cards"),
   Demo(builder: (context) => const StackList(), name: "Stack List"),
-  //Demo(builder: (context) => const Bubles(), name: "Bubles"),
+  Demo(builder: (context) => const BlurredList(), name: "Blurred List"),
 ];

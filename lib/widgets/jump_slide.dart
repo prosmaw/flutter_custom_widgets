@@ -69,7 +69,13 @@ class _JumpSlideState extends State<JumpSlide> with TickerProviderStateMixin {
         setState(() {});
       });
 
-    slideController.addStatusListener((status) async {
+    slideListener();
+
+    slideController.repeat(reverse: true);
+  }
+
+  void slideListener() {
+    return slideController.addStatusListener((status) async {
       if (status == AnimationStatus.forward) {
         for (int i = (listTurns.length - 1); i >= 0; i--) {
           currentPos = i;
@@ -111,8 +117,6 @@ class _JumpSlideState extends State<JumpSlide> with TickerProviderStateMixin {
         }
       }
     });
-
-    slideController.repeat(reverse: true);
   }
 
   @override
@@ -161,7 +165,7 @@ class _JumpSlideState extends State<JumpSlide> with TickerProviderStateMixin {
                       scaleY: yScales[index].value,
                       child: Container(
                         width: boxWidth, //listWidth[index].value,
-                        height: boxWidth, //listHeight[index].value,
+                        height: boxWidth,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
