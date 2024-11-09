@@ -144,7 +144,7 @@ class _BlurredCardState extends State<BlurredCard>
   late AnimationController blurController = AnimationController(
       vsync: this, duration: const Duration(milliseconds: 400));
   late Animation<double> sigmaTween =
-      Tween<double>(begin: 20.0, end: 0).animate(blurController);
+      Tween<double>(begin: 25.0, end: 0).animate(blurController);
   late Animation<double> opacityAnimation =
       Tween<double>(begin: 0, end: 1).animate(blurController);
 

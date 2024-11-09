@@ -1,6 +1,5 @@
 import 'package:custom_widgets/widgets/card_box.dart';
 import 'package:flutter/material.dart';
-//import 'dart:math' as math;
 
 class FanOutAnimation extends StatefulWidget {
   const FanOutAnimation({super.key});
