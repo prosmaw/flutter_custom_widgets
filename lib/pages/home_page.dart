@@ -4,6 +4,7 @@ import 'package:custom_widgets/widgets/card_fan_out_animation.dart';
 import 'package:custom_widgets/widgets/cards_cascade_out.dart';
 import 'package:custom_widgets/widgets/cards_stack.dart';
 import 'package:custom_widgets/widgets/dots_loading.dart';
+import 'package:custom_widgets/widgets/dropdown_menu.dart';
 import 'package:custom_widgets/widgets/jump_slide.dart';
 import 'package:custom_widgets/widgets/loading_animation.dart';
 import 'package:custom_widgets/widgets/rotating_arcs.dart';
@@ -48,6 +49,7 @@ class Demo {
 }
 
 List<Demo> widgetsDemo = [
+  Demo(builder: (context) => const CustomDropdownMenu(), name: "Dropdown Menu"),
   Demo(
       builder: (context) => const RotatingGradientArc(),
       name: "Rotating Gradient Arc"),
