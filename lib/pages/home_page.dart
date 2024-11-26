@@ -1,6 +1,7 @@
 import 'package:custom_widgets/widgets/angular_gradient_button.dart';
 import 'package:custom_widgets/widgets/blurred_list.dart';
 import 'package:custom_widgets/widgets/card_fan_out_animation.dart';
+import 'package:custom_widgets/widgets/card_splitting.dart';
 import 'package:custom_widgets/widgets/cards_cascade_out.dart';
 import 'package:custom_widgets/widgets/cards_stack.dart';
 import 'package:custom_widgets/widgets/dots_loading.dart';
@@ -66,6 +67,7 @@ List<Demo> widgetsDemo = [
   Demo(
       builder: (context) => const CardsCascadeOut(), name: "Cascade out cards"),
   Demo(builder: (context) => const CardsStack(), name: "Stack cards"),
+  Demo(builder: (context) => const CardSplitting(), name: "Card Splitting"),
   Demo(builder: (context) => const StackList(), name: "Stack List"),
   Demo(builder: (context) => const BlurredList(), name: "Blurred List"),
 ];
