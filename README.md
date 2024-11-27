@@ -14,6 +14,11 @@ Have you seen something awesome you'd like to replicate in Flutter or you have a
 Check out the [[Contributing Guidelines](CONTRIBUTING.md)] to get started. Whether you’re reporting a bug, suggesting a feature, or submitting a new widget, your input is invaluable to making this project even better.
 
 
+|                                             Card Splitting                                                              |                                                                                                               |                                                                                                     |
+| :---------------------------------------------------------------------------------------------------------------------: |:------------------------------------------------------------------------------------------------------------------------:| :----------------------------------------------------------------------------------------------------------------------:|
+| ![card_splitting](https://github.com/user-attachments/assets/f4e4b7c6-834d-413b-9202-2087024cd40f)                      |                           |                        |
+| [[SOURCE](lib/widgets/card_splitting.dart)] [[Inspiration](https://x.com/nitishkmrk/status/1860935449713557924)]        |             |          |
+
 
 |                                             Stack List                                                                  |                           Stack cards                                                                                    |                       Dropdown interaction                                                                              |
 | :---------------------------------------------------------------------------------------------------------------------: |:------------------------------------------------------------------------------------------------------------------------:| :----------------------------------------------------------------------------------------------------------------------:|
